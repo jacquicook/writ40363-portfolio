@@ -1,0 +1,51 @@
+*{
+    border: 1px solid red;
+    }
+
+header {
+
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    height: 70vh;
+    background-color: darkgreen;
+}
+
+
+.header_text {
+   
+   background-color: aquamarine;
+   height: 50vh;
+   width:45%;
+
+
+}
+
+
+.header_pic {
+
+   background-color: aquamarine;
+   height: 50vh;
+   width:45%;
+
+
+}
+
+
+
+
+    h1 {
+        color: #4d1979;
+        background-color: azure; 
+
+
+
+    }
+
+     h2 {
+        color: #4d1979;
+        background-color: pink;
+
+
+
+    }
