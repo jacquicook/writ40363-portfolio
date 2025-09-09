@@ -1,51 +1,101 @@
 *{
-    border: 1px solid red;
-    }
+
+    /*The next lines override the 
+    brower's margin and padding
+    defalts */
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+body    }
+ /*
+ font-family: system-ui, -apple system, sans-serif;
+
+   /* Line height 1.6 = 160% of font size - imporves readability */
+   line-height: 1.6;
+
+   /* #333 is dark gray - softer than pure black for better reading experience */
+   color: #333;
+   
+
+
+nav {
+    background-color: blueviolet;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e9ecef;
+
+}
+
 
 header {
-
+/*
     display: flex;
     flex-direction: row;
     gap: 2rem;
     height: 70vh;
-    background-color: darkgreen;
+    background-color: darkgreen; */
+
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+    height: 60vh;
+    background-color: #f8f9fa;
+
+
 }
 
 
 .header_text {
    
    background-color: aquamarine;
-   height: 50vh;
-   width:45%;
-
-
+   flex: 1;
+   padding: 2rem;
 }
 
 
 .header_pic {
 
-   background-color: aquamarine;
-   height: 50vh;
-   width:45%;
-
-
+    flex: 1;
+ /* Takes up equal space */
+ background-color: burlywood;
+ min-height: 300px;
+ border-radius: 10px;
+ /* Subtle rounded corners */
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: cornflowerblue;
 }
 
+main{
+ max-width: 65ch;  /* About 65 characters wide - good for reading on any screen */
+ margin: 0 auto;  /* Centers the content */
+ padding: 5%;    /* 5% padding scales with screen size */
+}
+
+ section {
+    margin-bottom: 2rem;
+ }
+
+ /* Consistent spacing between paragraphs */
+ p + p {
+    margin-top: 1rem;
+ }
 
 
-
-    h1 {
-        color: #4d1979;
-        background-color: azure; 
-
-
-
+ h1 {
+    color: #4d1979;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1 rem;
+    background-color: azure;
     }
 
      h2 {
         color: #4d1979;
-        background-color: pink;
-
-
-
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1 rem;
+        background-color: pink
     }
