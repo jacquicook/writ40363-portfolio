@@ -1,4 +1,21 @@
-* {
+* 
+
+{
+  :root {
+ --primary-color: #1e40af;
+ --heading-color: #4d1979;
+ --text-color: #1f2937;
+ --light-text: #6b7280;
+ --background: #833b3b;
+ --light-background: #f9fafb;
+ --card-background: #f8f9fa;
+ --card-border: #e9ecef;
+ --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ --card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+ --accent-color: #28a745;
+ --link-hover: #007bff;
+}
+
 
     /*The next lines override the 
     brower's margin and padding
@@ -9,6 +26,13 @@
     padding: 0;
 
     body {
+        font-family: serif;
+        line-height: 1.6;
+
+        color: var(--text-color);
+        background: var(--background);
+        
+        ;
         /*
  font-family: system-ui, -apple system, sans-serif;
 
@@ -23,7 +47,7 @@
 
 
     nav {
-        background-color: blueviolet;
+        background-color: rgb(204, 230, 247);
         padding: 1rem 2rem;
         border-bottom: 1px solid #e9ecef;
 
@@ -51,7 +75,7 @@
 
     .header_text {
 
-        background-color: aquamarine;
+        background-color: rgb(172, 216, 238);
         flex: 1;
         padding: 2rem;
     }
@@ -61,7 +85,7 @@
 
         flex: 1;
         /* Takes up equal space */
-        background-color: burlywood;
+        background-color: rgb(172, 216, 238);
         min-height: 300px;
         border-radius: 10px;
         /* Subtle rounded corners */
@@ -72,8 +96,8 @@
     }
 
     .header_pic img {
-        width: 100%;
-        height: 100%;
+        /* width: 100%;
+        height: 100%; */
         max-width: 400 px;
         max-height: 400 px;
         object-fit: cover;
@@ -160,7 +184,7 @@
 
 
     h1 {
-        color: #4d1979;
+        color: var(--heading-color);
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 1 rem;
@@ -168,7 +192,7 @@
     }
 
     h2 {
-        color: #4d1979;
+        color:var(--heading-color);
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 1 rem;
@@ -176,6 +200,7 @@
     }
 
     h3 {
+        color:var(--heading-color);
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 0.6rem;
@@ -263,9 +288,9 @@
         gap: 2rem;
     }
 
-    .nav-links a {
+    .nav-links a:hover {
         text-decoration: none;
-        color: #2c3e50;
+        color: var(--accent-color);
         font-weight: 500;
     }
 
