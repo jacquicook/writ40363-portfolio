@@ -373,3 +373,164 @@
      nav ul { display: flex !important; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
      nav a { color: #333 !important; text-decoration: none; font-weight: 600; }
      header, nav { overflow: visible; }
+
+/* Generic section layout */
+section { padding: 4rem 1rem; scroll-margin-top: 80px; }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+
+/* Shared section headings */
+.section-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #2e7d32;   /* match your theme */
+  margin: 0.6rem auto 0;
+}
+
+/* Center the contact text */
+#contact p { text-align: center; }
+#contact a { text-decoration: underline; }
+
+a, button { outline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid #2e7d32; }
+
+body { color:#333; }
+.card p { color:#333; }
+
+.skip-link{ position:absolute; left:-9999px; }
+.skip-link:focus{ left:1rem; top:1rem; background:#fff; padding:.5rem 1rem; border:2px solid #000; }
+
+@media (max-width: 768px) {
+  /* Stack skills cards in one column */
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero section stacks vertically on small screens */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* About section stacks vertically on small screens */
+  .about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Make images smaller and centered */
+  .header_pic img,
+  .about-image img {
+    max-width: 80%;
+    height: auto;
+    margin: 1rem auto;
+  }
+
+  /* Center text so it matches stacked layout */
+  .header_text {
+    text-align: center;
+  }
+}
+
+/* HERO section: text left, image right */
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;  /* pushes text left + image right */
+  align-items: center;
+  gap: 2rem;
+}
+
+.header_text {
+  flex: 1;        /* text takes available space */
+}
+
+.header_pic {
+  flex: 0 0 auto; /* image stays on the right */
+}
+
+.header_pic img {
+  max-width: 300px;   /* control image size */
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header_pic img {
+    max-width: 80%;
+    margin: 1rem auto;
+  }
+}
+
+/* NAV container: space logo left + links right */
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  display: flex;
+  justify-content: space-between; /* pushes logo left, links right */
+  align-items: center;
+}
+
+/* Logo text */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;  /* change if you want */
+}
+
+/* Nav links inline */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Full-width nav bar */
+.site-nav {
+  width: 100%;
+  background: #fff;  /* optional background */
+  border-bottom: 1px solid #eee; /* optional */
+}
+
+/* Spread links across the whole screen */
+.site-nav .nav-links {
+  display: flex;
+  justify-content: space-evenly; /* spaces links evenly edge-to-edge */
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 14px 0;
+}
+
+.site-nav .nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}

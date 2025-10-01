@@ -1,0 +1,13 @@
+# System files
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# Sandbox folders
+sandbox/
+sandbox_backup/
+sandbox_css/
+
+# Node modules (if ever used)
+node_modules/
