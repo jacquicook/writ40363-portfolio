@@ -1,220 +1,223 @@
 // ==========================================
 // PROJECT 2: LOCAL FAVORITES TRACKER
-// LAB13: Functions & DOM Manipulation
+// FINAL app.js (Labs 13 + 14 + 15)
 // ==========================================
 
-console.log('LAB13: Functions & DOM Manipulation');
+console.log('PROJECT 2: Local Favorites Tracker - FINAL app.js');
 
-// Array to store all favorites
+const STORAGE_KEY = 'localFavorites';
+
+// App state
 let favorites = [];
 
-// Get references to DOM elements
-const form = document.getElementById('add-favorite-form');
-const favoritesList = document.getElementById('favorites-list');
+// DOM ready to ensure elements exist
+document.addEventListener('DOMContentLoaded', () => {
+  // ===== Get references to DOM elements =====
+  const form = document.getElementById('add-favorite-form');
+  const favoritesList = document.getElementById('favorites-list');
+  const searchInput = document.getElementById('search-input');
+  const categoryFilter = document.getElementById('category-filter');
+  const clearAllBtn = document.getElementById('clear-all-btn');
 
-console.log('Form:', form);
-console.log('Favorites list container:', favoritesList);
+  console.log('Form:', form);
+  console.log('Favorites list:', favoritesList);
+  console.log('Search input:', searchInput);
+  console.log('Category filter:', categoryFilter);
 
-// Function to display all favorites on the page
-function displayFavorites() {
+  if (!form || !favoritesList) {
+    console.warn('Required elements missing: #add-favorite-form and/or #favorites-list');
+    return;
+  }
+
+  // ===== LAB15: Persistence =====
+  function saveFavorites() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+      console.log('Favorites saved to localStorage (count:', favorites.length + ')');
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+      alert('Unable to save favorites. Your browser may have storage disabled.');
+    }
+  }
+
+  function loadFavorites() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      favorites = saved ? JSON.parse(saved) : [];
+      if (!Array.isArray(favorites)) favorites = [];
+      console.log('Loaded', favorites.length, 'favorite(s) from localStorage');
+    } catch (error) {
+      console.error('Error loading from localStorage:', error);
+      favorites = [];
+    }
+  }
+
+  // ===== LAB13 + LAB14: Display/Search/Filter/Delete/Add =====
+
+  // Display all favorites on the page
+  function displayFavorites() {
     console.log('Displaying favorites...');
-
-    // Clear the current display
     favoritesList.innerHTML = '';
 
-    // Check if there are any favorites
+    // If none, show empty message
     if (favorites.length === 0) {
-        favoritesList.innerHTML = '<p class="empty-message">No favorites yet. Add your first favorite place above!</p>';
-        return;
+      favoritesList.innerHTML = '<p class="empty-message">No favorites yet. Add your first favorite place above!</p>';
+      return;
     }
 
-    // Reset search and filter, then search (which displays)
-    document.getElementById('search-input').value = '';
-    document.getElementById('category-filter').value = 'all';
+    // Reset search/filter, then show everything via searchFavorites
+    if (searchInput) searchInput.value = '';
+    if (categoryFilter) categoryFilter.value = 'all';
     searchFavorites();
-}
+  }
 
-// Function to save favorites to localStorage
-function saveFavorites() {
-    try {
-        localStorage.setItem('localFavorites', JSON.stringify(favorites));
-        console.log('Favorites saved to localStorage');
-        console.log('Saved', favorites.length, 'favorites');
-    } catch (error) {
-        console.error('Error saving to localStorage:', error);
-        alert('Unable to save favorites. Your browser may have storage disabled.');
-    }
-}
+  // Search and filter favorites, then render
+  function searchFavorites() {
+    const searchText = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
 
-// Function to load favorites from localStorage
-function loadFavorites() {
-    try {
-        const savedData = localStorage.getItem('localFavorites');
+    console.log('Searching for:', searchText, 'Category:', selectedCategory);
 
-        if (savedData) {
-            favorites = JSON.parse(savedData);
-            console.log('Favorites loaded from localStorage');
-            console.log('Loaded', favorites.length, 'favorites');
-        } else {
-            console.log('No saved favorites found');
-            favorites = [];
-        }
-    } catch (error) {
-        console.error('Error loading from localStorage:', error);
-        console.log('Starting with empty favorites array');
-        favorites = [];
-    }
-}
-
-// Function to delete a favorite by index
-function deleteFavorite(index) {
-    console.log('Deleting favorite at index:', index);
-    console.log('Favorite to delete:', favorites[index].name);
-
-    // Confirm deletion with user
-    const favorite = favorites[index];
-    const confirmDelete = confirm(`Are you sure you want to delete "${favorite.name}"?`);
-
-       if (confirmDelete) {
-        // Remove from array
-        favorites.splice(index, 1);
-        console.log('Favorite deleted. Total remaining:', favorites.length);
-
-        // Save to localStorage
-        saveFavorites();
-
-        // Re-apply current search/filter
-        searchFavorites();
-    }
-// Function to search favorites by name or notes
-function searchFavorites() {
-    // Get the search input value
-    const searchInput = document.getElementById('search-input');
-    const searchText = searchInput.value.toLowerCase().trim();
-
-    console.log('Searching for:', searchText);
-
-    // Get the category filter value
-    const categoryFilter = document.getElementById('category-filter');
-    const selectedCategory = categoryFilter.value;
-
-    // Clear the display
     favoritesList.innerHTML = '';
 
-    // Filter favorites based on search text and category
-    const filteredFavorites = favorites.filter(function(favorite) {
-        // Check if name or notes match search text
-        const matchesSearch = searchText === '' ||
-                             favorite.name.toLowerCase().includes(searchText) ||
-                             favorite.notes.toLowerCase().includes(searchText);
+    const filteredFavorites = favorites.filter((favorite) => {
+      const matchesSearch =
+        searchText === '' ||
+        favorite.name.toLowerCase().includes(searchText) ||
+        (favorite.notes || '').toLowerCase().includes(searchText);
 
-        // Check if category matches filter
-        const matchesCategory = selectedCategory === 'all' ||
-                               favorite.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === 'all' || favorite.category === selectedCategory;
 
-        // Return true only if both conditions match
-        return matchesSearch && matchesCategory;
+      return matchesSearch && matchesCategory;
     });
 
     console.log('Found', filteredFavorites.length, 'matching favorites');
 
-    // Check if any favorites match
     if (filteredFavorites.length === 0) {
+      if (searchText !== '' || selectedCategory !== 'all') {
         favoritesList.innerHTML = '<p class="empty-message">No favorites match your search.</p>';
-        return;
+      } else {
+        favoritesList.innerHTML = '<p class="empty-message">No favorites yet. Add your first favorite place above!</p>';
+      }
+      return;
     }
 
-    // Display filtered favorites
-    filteredFavorites.forEach(function(favorite) {
-        // Find the original index for delete button
-        const originalIndex = favorites.indexOf(favorite);
+    filteredFavorites.forEach((favorite) => {
+      const originalIndex = favorites.indexOf(favorite);
+      const starsDisplay = '⭐'.repeat(favorite.rating);
 
-        // Create the star rating display
-        let starsDisplay = '⭐'.repeat(favorite.rating);
+      const cardHTML = `
+        <div class="favorite-card">
+          <h3>${favorite.name}</h3>
+          <span class="favorite-category">${favorite.category}</span>
+          <div class="favorite-rating">${starsDisplay} (${favorite.rating}/5)</div>
+          <p class="favorite-notes">${favorite.notes}</p>
+          <p class="favorite-date">Added: ${favorite.dateAdded}</p>
+          <div class="favorite-actions">
+            <button class="btn btn-danger" data-index="${originalIndex}">Delete</button>
+          </div>
+        </div>
+      `;
 
-        // Build the HTML for this favorite card
-        const cardHTML = `
-            <div class="favorite-card">
-                <h3>${favorite.name}</h3>
-                <span class="favorite-category">${favorite.category}</span>
-                <div class="favorite-rating">${starsDisplay} (${favorite.rating}/5)</div>
-                <p class="favorite-notes">${favorite.notes}</p>
-                <p class="favorite-date">Added: ${favorite.dateAdded}</p>
-                <div class="favorite-actions">
-                    <button class="btn btn-danger" onclick="deleteFavorite(${originalIndex})">Delete</button>
-                </div>
-            </div>
-        `;
-
-        // Add this card to the favorites list
-        favoritesList.innerHTML += cardHTML;
+      favoritesList.insertAdjacentHTML('beforeend', cardHTML);
     });
-}
 
+    // Delegate delete buttons
+    favoritesList.querySelectorAll('.btn.btn-danger').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const index = parseInt(e.currentTarget.getAttribute('data-index'), 10);
+        deleteFavorite(index);
+      });
+    });
+  }
 
-// Function to handle adding a new favorite
-function addFavorite(event) {
-    event.preventDefault();  // Prevent page reload
+  // Delete favorite by index
+  function deleteFavorite(index) {
+    if (index < 0 || index >= favorites.length) return;
+
+    console.log('Deleting favorite at index:', index);
+    console.log('Favorite to delete:', favorites[index].name);
+
+    const favorite = favorites[index];
+    const confirmDelete = confirm(`Are you sure you want to delete "${favorite.name}"?`);
+
+    if (confirmDelete) {
+      favorites.splice(index, 1);
+      console.log('Favorite deleted. Total remaining:', favorites.length);
+      saveFavorites();        // persist change
+      searchFavorites();      // re-apply current filters
+    } else {
+      console.log('Deletion cancelled by user');
+    }
+  }
+
+  // Handle adding a new favorite
+  function addFavorite(event) {
+    event.preventDefault();
 
     console.log('Add Favorite button clicked!');
 
-    // Step 1: Get values from form inputs
     const nameInput = document.getElementById('name');
     const categoryInput = document.getElementById('category');
     const ratingInput = document.getElementById('rating');
     const notesInput = document.getElementById('notes');
 
-    const nameValue = nameInput.value;
-    const categoryValue = categoryInput.value;
-    const ratingValue = parseInt(ratingInput.value);  // Convert to number
-    const notesValue = notesInput.value;
+    const nameValue = (nameInput?.value || '').trim();
+    const categoryValue = (categoryInput?.value || '').trim();
+    const ratingValue = parseInt(ratingInput?.value || '0', 10);
+    const notesValue = (notesInput?.value || '').trim();
 
-    // Step 2: Validate required fields
     if (!nameValue || !categoryValue) {
-        alert('Please fill in the place name and category!');
-        return;
+      alert('Please fill in the place name and category!');
+      return;
     }
 
-    // Step 3: Create a favorite object
     const newFavorite = {
-        name: nameValue,
-        category: categoryValue,
-        rating: ratingValue,
-        notes: notesValue,
-        dateAdded: new Date().toLocaleDateString()
+      name: nameValue,
+      category: categoryValue,
+      rating: isNaN(ratingValue) ? 0 : ratingValue,
+      notes: notesValue,
+      dateAdded: new Date().toLocaleDateString()
     };
 
     console.log('Created favorite object:', newFavorite);
 
-    // Step 4: Add to favorites array
     favorites.push(newFavorite);
     console.log('Total favorites:', favorites.length);
 
-    // Step 5: Clear the form for next entry
+    saveFavorites(); // persist
     form.reset();
-    console.log('Form reset - ready for next favorite!');
+    displayFavorites(); // resets filters, then renders via searchFavorites
+    console.log('Favorite added successfully!');
+  }
 
-    // Step 6: Display the updated favorites list
+  // LAB15: Clear ALL favorites
+  function clearAllFavorites() {
+    const confirmClear = confirm('Are you sure you want to delete ALL favorites? This cannot be undone!');
+    if (!confirmClear) {
+      console.log('Clear all cancelled by user');
+      return;
+    }
+
+    favorites = [];
+    localStorage.removeItem(STORAGE_KEY);
+    console.log('All favorites cleared and localStorage removed');
+
     displayFavorites();
-}
+    alert('All favorites have been deleted.');
+  }
 
+  // ===== Wire up events =====
+  form.addEventListener('submit', addFavorite);
+  if (searchInput) searchInput.addEventListener('input', searchFavorites);
+  if (categoryFilter) categoryFilter.addEventListener('change', searchFavorites);
+  if (clearAllBtn) clearAllBtn.addEventListener('click', clearAllFavorites);
 
-// Connect the addFavorite function to the form submit event
-form.addEventListener('submit', addFavorite);
+  console.log('Event listeners attached - app is ready!');
 
-// Connect search input to searchFavorites function
-const searchInput = document.getElementById('search-input');
-searchInput.addEventListener('input', searchFavorites);
-
-// Connect category filter to searchFavorites function
-const categoryFilter = document.getElementById('category-filter');
-categoryFilter.addEventListener('change', searchFavorites);
-
-console.log('Search and filter event listeners attached!');
-
-// Load saved favorites from localStorage on startup
-loadFavorites();
-
-// Display the loaded favorites (or empty message)
-displayFavorites(); 
-}
+  // ===== Initial boot =====
+  loadFavorites();     // LAB15: load from localStorage
+  displayFavorites();  // LAB13/14: render (resets filters, then searchFavorites)
+  console.log('✅ Local Favorites Tracker is ready to use!');
+});
