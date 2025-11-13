@@ -81,6 +81,10 @@ fetch('./data/weather.json')
         displayWeather(data);
     });
 
+// ========================================
+// QUOTES WIDGET (from LAB17)
+// ========================================
+
 // Global variable to store all quotes
 let allQuotes = [];
 let currentQuoteIndex = -1; // Track current quote to avoid repeats
@@ -107,13 +111,11 @@ function loadQuotes() {
 
 // Function to display a random quote
 function displayRandomQuote() {
-  // Make sure we have quotes loaded
   if (allQuotes.length === 0) {
     console.error('No quotes available');
     return;
   }
 
-  // Get random index (different from current)
   let randomIndex;
   do {
     randomIndex = Math.floor(Math.random() * allQuotes.length);
@@ -122,7 +124,6 @@ function displayRandomQuote() {
   currentQuoteIndex = randomIndex;
   const quote = allQuotes[randomIndex];
 
-  // Display the quote
   const quotesDisplay = document.getElementById('quotes-display');
   quotesDisplay.innerHTML = `
     <div class="quote-card">
@@ -130,32 +131,164 @@ function displayRandomQuote() {
       <div class="quote-author">— ${quote.author}</div>
     </div>
   `;
-
-  console.log('Displayed quote:', quote);
 }
 
-// Function to show error message
+// Function to show quotes error
 function displayQuotesError() {
   const quotesDisplay = document.getElementById('quotes-display');
   quotesDisplay.innerHTML = `
-    <div class="error-message">
-      ⚠️ Could not load quotes
-    </div>
+    <div class="error-message">⚠️ Could not load quotes</div>
   `;
 }
 
-// Call loadQuotes when page loads
+// Initialize quotes
 loadQuotes();
 
-// Set up "New Quote" button
 function setupQuotesButton() {
   const newQuoteBtn = document.getElementById('new-quote-btn');
 
   newQuoteBtn.addEventListener('click', () => {
-    console.log('New quote button clicked!');
     displayRandomQuote();
   });
 }
 
-// Call setupQuotesButton after DOM is loaded
 setupQuotesButton();
+
+// ========================================
+// TASKS WIDGET (from LAB18)
+// ========================================
+
+// Load tasks
+function loadTasks() {
+  const tasksJSON = localStorage.getItem('dashboardTasks');
+  return tasksJSON ? JSON.parse(tasksJSON) : [];
+}
+
+// Save tasks
+function saveTasks(tasks) {
+  localStorage.setItem('dashboardTasks', JSON.stringify(tasks));
+  console.log('Tasks saved:', tasks);
+}
+
+// Display all tasks
+function displayTasks() {
+  const tasks = loadTasks();
+  const tasksList = document.getElementById('tasks-list');
+
+  if (tasks.length === 0) {
+    tasksList.innerHTML = `
+      <div class="no-tasks">No tasks yet. Add one above! ✨</div>
+    `;
+    updateTaskStats(tasks);
+    return;
+  }
+
+  tasksList.innerHTML = '';
+
+  tasks.forEach((task, index) => {
+    const taskItem = document.createElement('div');
+    taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = task.completed;
+    checkbox.addEventListener('change', () => toggleTask(index));
+
+    const taskText = document.createElement('span');
+    taskText.className = 'task-text';
+    taskText.textContent = task.text;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn-delete';
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.addEventListener('click', () => deleteTask(index));
+
+    taskItem.appendChild(checkbox);
+    taskItem.appendChild(taskText);
+    taskItem.appendChild(deleteBtn);
+
+    tasksList.appendChild(taskItem);
+  });
+
+  updateTaskStats(tasks);
+}
+
+// Add a new task
+function addTask(taskText) {
+  const tasks = loadTasks();
+
+  const newTask = {
+    text: taskText,
+    completed: false,
+    id: Date.now()
+  };
+
+  tasks.push(newTask);
+  saveTasks(tasks);
+  displayTasks();
+}
+
+// Setup form for adding tasks
+function setupTaskForm() {
+  const taskForm = document.getElementById('task-form');
+  const taskInput = document.getElementById('task-input');
+
+  taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const taskText = taskInput.value.trim();
+
+    if (taskText) {
+      addTask(taskText);
+      taskInput.value = '';
+      taskInput.focus();
+    }
+  });
+}
+
+// Toggle completion
+function toggleTask(index) {
+  const tasks = loadTasks();
+  tasks[index].completed = !tasks[index].completed;
+  saveTasks(tasks);
+  displayTasks();
+}
+
+// Delete a task
+function deleteTask(index) {
+  const tasks = loadTasks();
+  const taskToDelete = tasks[index];
+
+  if (confirm(`Delete task: "${taskToDelete.text}"?`)) {
+    tasks.splice(index, 1);
+    saveTasks(tasks);
+    displayTasks();
+  }
+}
+
+// Update task statistics
+function updateTaskStats(tasks) {
+  const statsDiv = document.getElementById('task-stats');
+
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.completed).length;
+  const pendingTasks = totalTasks - completedTasks;
+
+  if (totalTasks === 0) {
+    statsDiv.innerHTML = '';
+    return;
+  }
+
+  const completionPercentage = Math.round((completedTasks / totalTasks) * 100);
+
+  statsDiv.innerHTML = `
+    <div class="stat">Total: <strong>${totalTasks}</strong></div>
+    <div class="stat">Completed: <strong>${completedTasks}</strong></div>
+    <div class="stat">Pending: <strong>${pendingTasks}</strong></div>
+    <div class="stat">Progress: <strong>${completionPercentage}%</strong></div>
+  `;
+}
+
+// Initialize tasks on page load
+displayTasks();
+setupTaskForm();
