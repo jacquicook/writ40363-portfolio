@@ -109,6 +109,18 @@ function loadQuotes() {
     });
 }
 
+function copyQuoteToClipboard() {
+  const quoteText = document.querySelector('.quote-text').textContent;
+  const quoteAuthor = document.querySelector('.quote-author').textContent;
+  const fullQuote = `${quoteText}\n${quoteAuthor}`;
+
+  navigator.clipboard.writeText(fullQuote)
+    .then(() => alert('Quote copied to clipboard!'));
+}
+
+
+
+
 // Function to display a random quote
 function displayRandomQuote() {
   if (allQuotes.length === 0) {
@@ -151,6 +163,11 @@ function setupQuotesButton() {
     displayRandomQuote();
   });
 }
+
+const copyQuoteBtn = document.getElementById('copy-quote-btn');
+copyQuoteBtn.addEventListener('click', copyQuoteToClipboard);
+
+
 
 setupQuotesButton();
 
@@ -212,6 +229,12 @@ function displayTasks() {
 
   updateTaskStats(tasks);
 }
+
+
+
+
+
+
 
 // Add a new task
 function addTask(taskText) {
@@ -339,3 +362,32 @@ function setupThemeToggle() {
 // Call these when page loads
 initializeTheme();
 setupThemeToggle();
+
+// Enhancement: Welcome Message
+
+// Prompt for user's name and store it
+function askForUserName() {
+  const name = prompt('What is your name?');
+  if (name && name.trim() !== '') {
+    localStorage.setItem('dashboardUserName', name.trim());
+    updateWelcomeMessage();
+  }
+}
+
+// Update the greeting text
+function updateWelcomeMessage() {
+  const name = localStorage.getItem('dashboardUserName');
+  const subtitleEl = document.getElementById('dashboard-subtitle');
+
+  if (name) {
+    subtitleEl.textContent = `Welcome back, ${name}! Here's your day at a glance.`;
+  }
+}
+
+// Run on page load
+updateWelcomeMessage();
+
+// Hook up the Change Name button
+document
+  .getElementById('change-name-btn')
+  .addEventListener('click', askForUserName);

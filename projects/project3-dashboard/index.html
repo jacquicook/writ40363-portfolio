@@ -9,18 +9,22 @@
 <body>
     <div class="dashboard">
         <header class="dashboard-header">
-  <div class="header-content">
-    <div>
-      <h1>My Personal Dashboard</h1>
-      <p class="dashboard-subtitle">Welcome back! Here's your day at a glance.</p>
-    </div>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-      <span class="theme-icon">🌙</span>
-    </button>
-  </div>
-</header>
+            <div class="header-content">
+                <div>
+                    <h1 id="dashboard-title">My Personal Dashboard</h1>
+                    <p id="dashboard-subtitle" class="dashboard-subtitle">
+                        Welcome back! Here's your day at a glance.
+                    </p>
+                    <button id="change-name-btn" class="btn-primary">Change Name</button>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
 
         <main class="widgets-container">
+            
             <!-- Weather Widget -->
             <section class="widget weather-widget">
                 <h2>Current Weather</h2>
@@ -28,38 +32,42 @@
                     Loading weather data...
                 </div>
             </section>
+
+            <!-- Quotes Widget (cleaned + correct) -->
             <section class="widget quotes-widget">
-  <h2>Daily Inspiration</h2>
-  <div id="quotes-display">
-    <!-- Quote will appear here -->
-  </div>
-  <button id="new-quote-btn" class="btn-primary">New Quote</button>
-</section>
+                <h2>Daily Inspiration</h2>
+                <div id="quotes-display">
+                    <!-- Quote will appear here -->
+                </div>
+                <button id="new-quote-btn" class="btn-primary">New Quote</button>
+                <button id="copy-quote-btn" class="btn-primary">Copy Quote</button>
+            </section>
 
-<div class="widget tasks-widget">
-  <h2>My Tasks</h2>
+            <!-- Tasks Widget -->
+            <div class="widget tasks-widget">
+                <h2>My Tasks</h2>
 
-  <!-- Add Task Form -->
-  <form id="task-form" class="task-form">
-    <input
-      type="text"
-      id="task-input"
-      placeholder="Add a new task..."
-      required
-    />
-    <button type="submit" class="btn-primary">Add Task</button>
-  </form>
+                <!-- Add Task Form -->
+                <form id="task-form" class="task-form">
+                    <input
+                        type="text"
+                        id="task-input"
+                        placeholder="Add a new task..."
+                        required
+                    />
+                    <button type="submit" class="btn-primary">Add Task</button>
+                </form>
 
-  <!-- Task Statistics -->
-  <div id="task-stats" class="task-stats">
-    <!-- Stats will appear here -->
-  </div>
+                <!-- Task Statistics -->
+                <div id="task-stats" class="task-stats">
+                    <!-- Stats will appear here -->
+                </div>
 
-  <!-- Tasks List -->
-  <div id="tasks-list" class="tasks-list">
-    <!-- Tasks will appear here -->
-  </div>
-</div>
+                <!-- Tasks List -->
+                <div id="tasks-list" class="tasks-list">
+                    <!-- Tasks will appear here -->
+                </div>
+            </div>
 
         </main>
     </div>
