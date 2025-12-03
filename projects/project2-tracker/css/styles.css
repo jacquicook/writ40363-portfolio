@@ -1,184 +1,169 @@
 /* ==========================================
-   PROJECT 2: LOCAL FAVORITES TRACKER
-   CSS organized by sections for maintainability
-
-   Instructions: Add your styles in the marked sections below.
-   Each section shows which lab adds what code.
+   FONT IMPORT
    ========================================== */
-
-/* ==========================================
-   CSS RESET & BASE STYLES
-   LAB11: Add core foundation styles here
-   ========================================== */
-
-/* TODO LAB11: Add CSS reset and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 
 /* ==========================================
-   CONTAINER & LAYOUT
-   LAB11: Add container and layout styles here
+   RESET & BASE
    ========================================== */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-/* TODO LAB11: Add .container styles */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffe3ef; /* soft pink */
+    color: #374151;
+    line-height: 1.6;
+}
 
 
 /* ==========================================
    HEADER
-   LAB11: Add header with gradient background
    ========================================== */
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ff6fb5 0%, #ff98cc 100%);
     color: white;
-    padding: 2rem 0;
+    padding: 3rem 0;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(255, 111, 181, 0.35);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 3rem;
+    font-weight: 700;
 }
 
 .subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: 1.2rem;
+    opacity: 0.95;
 }
-/* TODO LAB11: Add header, h1, and .subtitle styles */
 
 
 /* ==========================================
-   MAIN CONTENT & SECTIONS
-   LAB11: Add section containers and spacing
+   LAYOUT
    ========================================== */
-
-/* TODO LAB11: Add main and section styles */
-
-main {
-    padding: 2rem 0;
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 2.5rem 20px 4rem;
 }
 
 section {
-    background: white;
-    padding: 2rem;
+    background: #ffffff;
+    padding: 2rem 2rem 2.5rem;
     margin-bottom: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 18px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
 }
 
 h2 {
-    color: #667eea;
+    color: #ff6fb5;
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
-    font-size: 1.8rem;
 }
 
 
 /* ==========================================
-   FORM STYLES
-   LAB11: Add form layout and input styling
-   TODO LAB13: May add form validation styles
+   FORM FIELDS
    ========================================== */
-
-/* TODO LAB11: Add .form-group, label, input, select, textarea styles */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
 label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     font-weight: 600;
-    color: #555;
+    color: #444;
 }
 
 input[type="text"],
 select,
 textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
+    padding: 0.9rem 1rem;
+    border: 2px solid #ffd0e3;
+    border-radius: 14px;
+    background-color: #fff;
     font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 input[type="text"]:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #ff6fb5;
+    box-shadow: 0 0 0 3px rgba(255, 111, 181, 0.25);
+    transform: translateY(-1px);
 }
 
 textarea {
+    min-height: 90px;
     resize: vertical;
-    min-height: 80px;
 }
+
+.favorites-count {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 1.25rem;
+}
+
 
 /* ==========================================
    BUTTONS
-   LAB11: Add primary button styling
-   TODO LAB14: Will add .btn-danger and .btn-secondary here
    ========================================== */
-
-/* TODO LAB11: Add .btn and .btn-primary styles */
-
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.9rem 1.8rem;
     border: none;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 999px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-block;
+    transition: all 0.25s ease;
+    font-size: 1rem;
 }
 
+/* Pink primary button */
 .btn-primary {
-    background-color: #667eea;
+    background-color: #ff6fb5;
     color: white;
+    box-shadow: 0 10px 20px rgba(255, 111, 181, 0.35);
 }
 
 .btn-primary:hover {
-    background-color: #5568d3;
+    background-color: #ff559f;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-.btn-primary:active {
-    transform: translateY(0);
-}
-
+/* Green delete button */
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #4ade80;
     color: white;
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
+    background-color: #2f855a;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 
-.btn-danger:active {
-    transform: translateY(0);
-}
 
 /* ==========================================
-   SEARCH CONTROLS
-   LAB11: Add search input and filter layout
-   TODO LAB14: Will connect to JavaScript search functionality
+   SEARCH BAR
    ========================================== */
-
-/* TODO LAB11: Add .search-controls styles */
-
 .search-controls {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
 }
 
 .search-controls input {
@@ -191,74 +176,66 @@ textarea {
 
 
 /* ==========================================
-   FAVORITES GRID & CARDS
-   LAB11: Add grid layout structure
-   TODO LAB13: Cards will be populated by JavaScript
+   FAVORITES GRID
    ========================================== */
-
-/* TODO LAB11: Add .favorites-grid and .empty-message styles */
-
 .favorites-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1.75rem;
 }
 
 .empty-message {
     grid-column: 1 / -1;
     text-align: center;
+    padding: 2rem;
     color: #999;
     font-style: italic;
-    padding: 2rem;
 }
+
 
 /* ==========================================
    FAVORITE CARD STYLES
-   LAB11: Prepare card design for JavaScript
-   LAB13: JavaScript will create cards using these styles
    ========================================== */
-
-/* TODO LAB11: Add .favorite-card and related styles */
 .favorite-card {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
+    background: #fff;
+    border: 2px solid #ffd0e3;
+    border-radius: 16px;
     padding: 1.5rem;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
+    box-shadow: 0 10px 20px rgba(255, 111, 181, 0.18);
 }
 
 .favorite-card:hover {
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-    transform: translateY(-5px);
+    border-color: #ff6fb5;
+    transform: translateY(-6px);
+    box-shadow: 0 15px 28px rgba(255, 111, 181, 0.28);
 }
 
 .favorite-card h3 {
-    color: #333;
-    margin-bottom: 0.5rem;
     font-size: 1.3rem;
+    color: #ff6fb5;
+    margin-bottom: 0.5rem;
 }
 
 .favorite-category {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background-color: #667eea;
-    color: white;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    background-color: #ffeff7;
+    color: #ff6fb5;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    margin-bottom: 0.6rem;
 }
 
 .favorite-rating {
-    color: #f39c12;
-    font-size: 1.1rem;
+    color: #4ade80;
+    font-size: 1.15rem;
     margin-bottom: 0.5rem;
 }
 
 .favorite-notes {
-    color: #666;
-    margin-bottom: 1rem;
-    line-height: 1.5;
+    color: #555;
+    margin-bottom: 0.8rem;
 }
 
 .favorite-date {
@@ -269,59 +246,36 @@ textarea {
 
 .favorite-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.6rem;
 }
+
 
 /* ==========================================
    FOOTER
-   LAB11: Add simple centered footer
    ========================================== */
-
-/* TODO LAB11: Add footer styles */
-
 footer {
-    background-color: #333;
+    background-color: #ff6fb5;
     color: white;
     text-align: center;
-    padding: 1.5rem 0;
-    margin-top: 3rem;
+    padding: 1.4rem 0;
+    margin-top: 2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 footer p {
-    margin: 0;
+    font-size: 0.95rem;
 }
 
 
 /* ==========================================
-   RESPONSIVE DESIGN
-   LAB11: Add mobile-first responsive breakpoints
-   IMPORTANT: Keep ALL media queries in this section!
-   TODO LAB13-15: May add responsive adjustments for new features
+   RESPONSIVE
    ========================================== */
-
-   
-
-/* TODO LAB11: Add @media queries for tablet and mobile */
-
-/* CSS Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Base body styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
-}
-
-.favorites-count {
-    text-align: center;
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 1rem;
-    font-style: italic;
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.4rem;
+    }
+    h2 {
+        font-size: 1.75rem;
+    }
 }
