@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playlist Pulse | Music Playlist Manager</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Back to portfolio home (adjust path if needed) -->
+  <a href="../index.html" class="back-link">← Back to Portfolio Home</a>
+
+  <header class="app-header">
+    <div class="app-title-wrapper">
+      <div class="logo-circle" aria-hidden="true">
+        🎧
+      </div>
+      <div>
+        <h1>Playlist Pulse</h1>
+        <p class="subtitle">Track your favorite songs and playlists</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- ADD SONG SECTION -->
+    <section class="card add-section" aria-labelledby="add-song-heading">
+      <div class="card-header">
+        <h2 id="add-song-heading">Add New Track</h2>
+        <p class="card-subtitle">Build your own Spotify-style library</p>
+      </div>
+
+      <form id="song-form" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="title">Song Title *</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              placeholder="Enter song title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="artist">Artist *</label>
+            <input
+              type="text"
+              id="artist"
+              name="artist"
+              required
+              placeholder="Enter artist name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="album">Album</label>
+            <input
+              type="text"
+              id="album"
+              name="album"
+              placeholder="(Optional) Enter album name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="genre">Genre *</label>
+            <select id="genre" name="genre" required>
+              <option value="">Select a genre</option>
+              <option value="2000s">2000s</option>
+              <option value="Rock">Rock</option>
+              <option value="Rap">Rap</option>
+              <option value="Sad">Sad</option>
+              <option value="Oldies">Oldies</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="playlist">Playlist Name *</label>
+            <input
+              type="text"
+              id="playlist"
+              name="playlist"
+              required
+              placeholder="e.g., Gym Vibes, Night Drive"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating (1–5)</label>
+            <select id="rating" name="rating">
+              <option value="">No rating</option>
+              <option value="1">★☆☆☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="4">★★★★☆</option>
+              <option value="5">★★★★★</option>
+            </select>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="notes">Notes</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="2"
+              placeholder="Why do you love this song?"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <p class="required-hint">* Required fields</p>
+          <button type="submit" class="btn-primary">Add Track</button>
+        </div>
+
+        <p id="form-error" class="form-error" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- LIBRARY + FILTERS -->
+    <section class="library-layout">
+      <!-- Left: your tracks + filters -->
+      <div class="card filters-card" aria-labelledby="your-library-heading">
+        <div class="card-header">
+          <h2 id="your-library-heading">Your Library</h2>
+          <p class="card-subtitle">
+            Filter by genre or search by song, artist, or playlist
+          </p>
+        </div>
+
+        <div class="filters-grid">
+          <div class="form-group">
+            <label for="filter-genre">Filter by Genre</label>
+            <select id="filter-genre">
+              <option value="all">All Genres</option>
+              <option value="2000s">2000s</option>
+              <option value="Rock">Rock</option>
+              <option value="Rap">Rap</option>
+              <option value="Sad">Sad</option>
+              <option value="Oldies">Oldies</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="search">Search Keywords</label>
+            <input
+              type="search"
+              id="search"
+              placeholder="Type to search..."
+            />
+          </div>
+
+          <div class="filters-actions">
+            <button id="clear-filters" class="btn-secondary" type="button">
+              Clear Filters
+            </button>
+          </div>
+        </div>
+
+        <div id="songs-list" class="songs-list" aria-live="polite">
+          <p class="empty-state">
+            No tracks yet. Add your first song above!
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: simple stats / recommendations -->
+      <aside class="card stats-card" aria-labelledby="stats-heading">
+        <div class="card-header">
+          <h2 id="stats-heading">Listening Snapshot</h2>
+          <p class="card-subtitle">See your top genre & a playlist idea</p>
+        </div>
+
+        <div class="stats-content">
+          <p>
+            <span class="stat-label">Total Tracks:</span>
+            <span id="stat-total">0</span>
+          </p>
+          <p>
+            <span class="stat-label">Top Genre:</span>
+            <span id="stat-top-genre">—</span>
+          </p>
+          <p class="recommendation-text" id="stat-recommendation">
+            Add a few songs to see a playlist recommendation.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Your JS -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>
