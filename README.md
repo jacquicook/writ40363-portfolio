@@ -1,47 +1,73 @@
-# Jacqui Cook - Web Development Portfolio
+Jacqui Cook – Web Development Portfolio
 
-**Course:** WRIT 40363 - Introduction to Web Applications
-**Semester:** Fall 2025
-**Institution:** Texas Christian University
+Course: WRIT 40363 – Introduction to Web Applications
+Semester: Fall 2025
+Institution: Texas Christian University
 
-## About This Portfolio
+About This Portfolio
 
-This repository contains my web development projects from WRIT 40363. The main portfolio site showcases my work and growth as a web developer.
+This repository contains my full web development portfolio for WRIT 40363. The site showcases each major project completed during the semester and documents my growth in HTML, CSS, JavaScript, and front-end development practices.
 
-**Live Portfolio:** https://github.com/jacquicook/writ40363-portfolio 
+Live Portfolio:
+🔗 https://jacquicook.github.io/writ40363-portfolio/
 
-## Repository Structure
+Repository Structure
+Main Portfolio (Root Directory)
 
-### Main Portfolio (Root)
-The root directory contains my enhanced portfolio website, which I continue to develop throughout the semester.
+The root of this repository contains my live, redesigned portfolio website, including the homepage, coursework section, and consolidated reflections.
 
-### Archived Projects
+Course Projects (Archived but Accessible)
 
-Individual course projects are preserved in the `projects/` directory:
+All individual project folders are stored in the projects/ directory, each with its own working index page, assets, and documentation.
 
-- **[Project 1: Personal Portfolio](projects/project1-original/)** - Original portfolio submission featuring HTML and CSS fundamentals
-- **[Project 2: Local Favorites Tracker](projects/project2-tracker/)** - Interactive application using JavaScript, DOM manipulation, and localStorage
-- **[Project 3: Personal Data Dashboard](projects/project3-dashboard/)** - Coming soon!
+Project 1: Personal Portfolio
 
-## Technologies Used
+A responsive HTML/CSS portfolio demonstrating semantic structure, layout design, and accessibility.
 
-- HTML5
-- CSS3 (Flexbox, Grid, responsive design)
-- JavaScript (ES6+)
-- Git & GitHub
-- GitHub Pages
+Project 2: Local Favorites Tracker
 
-## Development Tools
+A JavaScript-powered app featuring form handling, search filtering, DOM updates, and localStorage persistence.
 
-- VS Code
-- GitHub Desktop
-- Live Server extension
+Project 3: Personal Data Dashboard
 
-## Contact
+A multi-widget dashboard integrating weather APIs, quote generation, and a task manager using async JavaScript.
 
-- **GitHub:** [jacquicook]https://github.com/jacquicook/writ40363-portfolio
-- **Email:** jacqui.cook@tcu.edu
+Project 4: Playlist Pulse (Project Zed)
 
----
+A Spotify-inspired playlist generator using filtering, dynamic UI updates, and more complex JS patterns.
 
-*This portfolio demonstrates my learning journey in web development.*
+Technologies Used
+
+HTML5 & semantic markup
+
+CSS3 — Flexbox, Grid, responsive design, variables
+
+JavaScript (ES6+) — DOM manipulation, async/await, APIs
+
+Data tools: localStorage, JSON, fetch() API
+
+Git & GitHub for version control
+
+GitHub Pages for deployment
+
+Development Tools
+
+Visual Studio Code
+
+GitHub Desktop
+
+Live Server extension
+
+Browser DevTools
+
+Contact
+
+Portfolio: https://jacquicook.github.io/writ40363-portfolio/
+
+GitHub: https://github.com/jacquicook
+
+Email: jacqui.cook@tcu.edu
+
+LinkedIn: https://www.linkedin.com/in/jacqui-cook-b47240218
+
+This portfolio represents my learning journey as a developing front-end web developer, combining design, code, and interactive functionality.
